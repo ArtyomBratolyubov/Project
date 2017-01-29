@@ -1,0 +1,22 @@
+﻿using System;
+namespace DAL.Interface.DTO
+{
+    public class DalAlbum : IEntity
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int AuthorId { get; set; }
+
+        public int? ImageId { get; set; }
+
+        public int SingerId { get; set; }
+
+        public int GenreId { get; set; }
+
+        public DateTime? DateOut { get; set; }
+    }
+}

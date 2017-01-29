@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = Model.Album.Name;
+}
+
+@model MvcPL.Models.AlbumViewModel
+
+@section main{
+    <div class="col-md-10 col-md-offset-1">
+        <table class="del-table">
+            <tr>
+                <td rowspan="4">
+                    <img src="~/File/GetFile/0@{@Model.Album.ImageId}" class="img" />
+                </td>
+                <td>
+                    <h3>@Model.Album.Name</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Genre</label><br />
+                    @Model.Album.GenreName
+                </td>
+            </tr>
+            @if (Model.Album.DateOut != null)
+            {
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Album.DateOut, null, new { @class = "" })<br />
+                        @Model.Album.DateOut.Value.ToString("D")
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <label>Singer</label><br />
+                    @Model.Album.SingerName
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <br />@Model.Album.Description
+                </td>
+            </tr>
+        </table>
+
+
+
+        <div class="panel-group" id="accordion">
+            @foreach (var item in Model.Songs)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Id">
+                                <span class="glyphicon glyphicon-triangle-bottom pull-right caret-collapse"></span>
+                            </a>
+                            @if (Request.IsAuthenticated)
+                            {
+                                if (Model.UserId == item.AuthorId || Array.Exists((string[])Model.Roles, element => element == "Moderator"))
+                                {
+                                    @Html.ActionLink(" ", "Delete", "Song", new { Id = item.Id }, new { @class = "glyphicon glyphicon-remove pull-right remove-icon" })
+                                    @Html.ActionLink(" ", "Edit", "Song", new { Id = item.Id }, new { @class = "glyphicon glyphicon-wrench pull-right" })
+                                }
+                            }
+                            @Html.ActionLink(item.Name, "Index", "Song", new { Id = item.Id }, new { @class = "panel-title" })
+                            @if (item.MusicId >= 1)
+                            {
+                                <span class="glyphicon glyphicon-music"></span>
+                            }
+                        </div>
+                    </div>
+                    <div id="collapse_@item.Id" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <tr>
+                                        <td>
+                                            <b>Description: </b>
+                                        </td>
+                                        <td>
+                                            @item.Description
+                                        </td>
+                                    </tr>
+                                }
+                                @if (item.MusicId >= 1)
+                                {
+                                    <tr>
+                                        <td colspan="3">
+                                            <audio controls>
+                                                <source src="~/File/GetFile/0@{@item.MusicId}" type="audio/mpeg">
+                                                Ваш браузер не поддерживает аудио
+                                            </audio>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="3">
+                                        Rating:
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= item.Rating)
+                                            {
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

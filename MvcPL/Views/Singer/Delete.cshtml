@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Delete singer";
+}
+
+@model MvcPL.Models.SingerEditViewModel
+
+@section main{
+    <div class="col-md-8 col-md-offset-2">
+        <h3>Delete singer?</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <table class="del-table">
+                <tr>
+                    <td rowspan="2">
+                        <img src="~/File/GetFile/0@{@Model.Singer.ImageId}" class="img" />
+                    </td>
+                    <td>
+                        <h3>@Model.Singer.Name</h3>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        @Model.Singer.Description
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-group row">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Cancel", "Index", "Singers", null, new { @class = "btn btn-default btn-block form-btn" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-danger btn-block form-btn" value="Delete" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @Html.ValidationSummary(false)
+        }
+    </div>
+}

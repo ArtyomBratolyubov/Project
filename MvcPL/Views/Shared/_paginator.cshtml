@@ -1,0 +1,20 @@
+﻿<div>
+    @if (Model.Pages > 1)
+    {
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    @for (int i = 1; i <= Model.Pages; i++)
+                    {
+                        @Ajax.ActionLink(i.ToString(), "Page", new { page = i },
+                         new AjaxOptions
+                                 {
+                                     UpdateTargetId = "accordion",
+                                     LoadingElementId = "loadingIndicator"
+                                 })
+                    }
+                </li>
+            </ul>
+        </div>
+    }
+</div>

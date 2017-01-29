@@ -1,0 +1,68 @@
+﻿body {
+    display: block;
+}
+
+#img_logo {
+    height: 50px;
+    width: auto;
+    position: relative;
+    top: 0px;
+}
+
+* {
+    border-radius: 1px !important;
+}
+
+nav {
+    border-radius: 0 !important;
+}
+
+.login-spacer {
+    margin-bottom: 30px;
+}
+
+.top-buffer {
+    margin-top: 70px;
+}
+
+.panel-black > .panel-heading {
+    color: #fff;
+    background-color: #2d2d2d;
+    border-color: #2d2d2d;
+}
+
+.sections {
+    background-color: #bababa;
+}
+
+.caret-collapse {
+    margin-top: 0px;
+    margin-left: 10px;
+    height: 20px;
+    width: 10px;
+}
+
+.remove-icon {
+    margin-left: 10px;
+}
+
+.img {
+    height: auto;
+    width: 150px;
+    margin-right: 10px;
+}
+
+.del-table {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.form-btn {
+    width: 90%;
+}
+
+.load-img {
+    height: 20px;
+    width: auto;
+    display: none;
+}

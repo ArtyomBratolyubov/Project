@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Delete Album";
+}
+
+@model MvcPL.Models.AlbumViewModel
+
+@section main{
+    <div class="col-md-8 col-md-offset-2">
+        <h3>Delete Album?</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <table class="del-table">
+                <tr>
+                    <td rowspan="4">
+                        <img src="~/File/GetFile/0@{@Model.Album.ImageId}" class="img" />
+                    </td>
+                    <td>
+                        <h3>@Model.Album.Name</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Genre</label><br />
+                        @Model.Album.GenreName
+                    </td>
+                </tr>
+                @if (Model.Album.DateOut != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => m.Album.DateOut, null, new { @class = "" })<br />
+                            @Model.Album.DateOut.Value.ToString("D")
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <label>Singer</label><br />
+                        @Model.Album.SingerName
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <br />@Model.Album.Description
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-group row">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Cancel", "Index", "Albums", null, new { @class = "btn btn-default btn-block form-btn" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-danger btn-block form-btn" value="Delete" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @Html.ValidationSummary(false)
+        }
+    </div>
+}

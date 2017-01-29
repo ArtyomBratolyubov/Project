@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "MUZIX";
+}
+
+@model MvcPL.Models.IndexViewModel
+
+@section main{
+    <div class="col-md-10 col-md-offset-1">
+        <h3>Latest</h3>
+        <div class="panel-group" id="accordion">
+            @foreach (var item in Model.LastAddedSongs)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Id">
+                                <span class="glyphicon glyphicon-triangle-bottom pull-right caret-collapse"></span>
+                            </a>
+                            @if (Request.IsAuthenticated)
+                            {
+                                if (Model.UserId == item.AuthorId || Array.Exists((string[])Model.Roles, element => element == "Moderator"))
+                                {
+                                    @Html.ActionLink(" ", "Delete", "Song", new { Id = item.Id }, new { @class = "glyphicon glyphicon-remove pull-right remove-icon" })
+                                    @Html.ActionLink(" ", "Edit", "Song", new { Id = item.Id }, new { @class = "glyphicon glyphicon-wrench pull-right" })
+                                }
+                            }
+                            @Html.ActionLink(item.SingerName, "Index", "Singer", new { Id = item.SingerId }, new { @class = "panel-title" }) - @Html.ActionLink(item.Name, "Index", "Song", new { Id = item.Id }, new { @class = "panel-title" })
+                            @if (item.MusicId >= 1)
+                            {
+                                <span class="glyphicon glyphicon-music"></span>
+                            }
+                        </div>
+                    </div>
+                    <div id="collapse_@item.Id" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <b>Album: </b>
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(item.AlbumName, "Index", "Album", new { Id = item.SingerId }, new { @class = "panel-title" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Genre: </b>
+                                    </td>
+                                    <td>
+                                        @item.GenreName
+                                    </td>
+                                </tr>
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <tr>
+                                        <td>
+                                            <b>Description: </b>
+                                        </td>
+                                        <td>
+                                            @item.Description
+                                        </td>
+                                    </tr>
+                                }
+                                @if (item.MusicId >= 1)
+                                {
+                                    <tr>
+                                        <td colspan="3">
+                                            <audio controls>
+                                                <source src="~/File/GetFile/0@{@item.MusicId}" type="audio/mpeg">
+                                                Ваш браузер не поддерживает аудио
+                                            </audio>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="3">
+                                        Rating:
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <span class="glyphicon glyphicon-star-empty"></span>//glyphicon glyphicon-star
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

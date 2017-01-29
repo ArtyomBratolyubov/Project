@@ -1,0 +1,35 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/css")
+    <link rel="icon" type="File/ico" href="~/Content/images/favicon.ico" />
+</head>
+<body>
+    <div class="row">
+        @Html.Partial("_navBar")
+    </div>
+    <div class="top-buffer"></div>
+    <div class="">
+        <div class="col-md-2">
+            @Html.Partial("_leftBar")
+        </div>
+        <div class="col-md-7" >
+            @RenderSection("Main", false)
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm">
+            @Html.Partial("_rightBar")
+        </div>
+    </div>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

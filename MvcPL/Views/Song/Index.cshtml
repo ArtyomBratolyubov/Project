@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = Model.Song.SingerName + " - " + Model.Song.Name;
+}
+
+@model MvcPL.Models.SongViewModel
+
+@section main{
+    <div class="col-md-8 col-md-offset-2">
+        <h3>@Model.Song.Name</h3>
+
+        <table class="del-table table">
+            <tr>
+                <td>
+                    <b>Singer: </b>
+                </td>
+                <td>
+                    @Html.ActionLink(Model.Song.SingerName, "Index", "Singer", new { Id = Model.Song.SingerId }, new { @class = "panel-title" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Album: </b>
+                </td>
+                <td>
+                    @Html.ActionLink(Model.Song.AlbumName, "Index", "Album", new { Id = Model.Song.AlbumId }, new { @class = "panel-title" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Genre: </b>
+                </td>
+                <td>
+                    @Model.Song.GenreName
+                </td>
+            </tr>
+            @if (!string.IsNullOrEmpty(Model.Song.Description))
+            {
+                <tr>
+                    <td>
+                        <b>Description: </b>
+                    </td>
+                    <td>
+                        @Model.Song.Description
+                    </td>
+                </tr>
+            }
+            @if (Model.Song.MusicId >= 1)
+            {
+                <tr>
+                    <td colspan="3">
+                        <audio controls>
+                            <source src="~/File/GetFile/0@{@Model.Song.MusicId}" type="audio/mpeg">
+                            Ваш браузер не поддерживает аудио
+                        </audio>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">
+                    <div id="Rating">
+                        @Html.Partial("Rate", Model.Song)
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+}
+
+@section scripts
+{
+    @*Ненавязивый JavaScript для выполнения запроса на сервер без полного обновления страницы*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}

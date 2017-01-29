@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = Model.Singer.Name;
+}
+
+@model MvcPL.Models.SingerViewModel
+
+@section main{
+    <div class="col-md-10 col-md-offset-1">
+        <table class="del-table">
+            <tr>
+                <td rowspan="2">
+                    <img src="~/File/GetFile/0@{@Model.Singer.ImageId}" class="img" />
+                </td>
+                <td>
+                    <h3><b>@Model.Singer.Name</b></h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Singer.Description
+                </td>
+            </tr>
+        </table>
+
+        <div class="panel-group" id="accordion">
+            @foreach (var item in Model.Albums)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.Id">
+                                <span class="glyphicon glyphicon-triangle-bottom pull-right caret-collapse"></span>
+                            </a>
+                            @if (Request.IsAuthenticated)
+                            {
+                                if (Model.UserId == item.AuthorId || Array.Exists((string [])Model.Roles, element => element == "Moderator"))
+                                {
+                                    @Html.ActionLink(" ", "Delete", "Albums", new { Id = item.Id }, new { @class = "glyphicon glyphicon-remove pull-right remove-icon" })
+                                    @Html.ActionLink(" ", "Edit", "Albums", new { Id = item.Id }, new { @class = "glyphicon glyphicon-wrench pull-right" })
+                                }
+                            }
+                            @Html.ActionLink(@item.Name, "Index", "Album", new { Id = item.Id }, new { @class = "" })
+                        </div>
+                    </div>
+                    <div id="collapse_@item.Id" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td rowspan="5">
+                                        <img src="~/File/GetFile/0@{@item.ImageId}" class="img" />
+                                    </td>
+                                </tr>
+                                @if (item.DateOut != null)
+                                {
+                                    <tr>
+                                        <td>
+                                            <b>Date out: </b>
+                                        </td>
+                                        <td>
+                                            @item.DateOut.Value.ToString("D")
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <b>Genre: </b>
+                                    </td>
+                                    <td>
+                                        @item.GenreName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Description: </b>
+                                    </td>
+                                    <td>
+                                        @item.Description
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

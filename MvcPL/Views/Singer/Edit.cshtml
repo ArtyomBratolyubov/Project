@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Edit singer";
+}
+
+@model MvcPL.Models.SingerEditViewModel
+
+@section main{
+    <div class="col-md-7 col-md-offset-2">
+        <h3>Edit singer</h3>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group ">
+                <img src="~/File/GetFile/0@{@Model.Singer.ImageId}" class="img" />
+            </div>
+
+            <div class="form-group ">
+                @Html.LabelFor(m => m.Singer.Name, null, new { @class = "" })
+
+                @Html.TextBoxFor(m => m.Singer.Name, null, new { @class = "form-control", @type = "text" })
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(m => m.Singer.Description, null, new { @class = "" })
+                @Html.TextAreaFor(m => m.Singer.Description, new { @class = "form-control", @type = "text", @rows = "10" })
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Image</label>
+                <input type="file" name="File" class="btn btn-default btn-block" accept=".jpg, .png">
+            </div>
+            <div class="form-group ">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Cancel", "Index", "Singers", null, new { @class = "btn btn-default btn-block form-btn" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-success btn-block form-btn" value="Edit" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @Html.ValidationSummary(false)
+        }
+    </div>
+}

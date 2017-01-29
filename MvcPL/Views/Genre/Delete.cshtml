@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Delete Genre";
+}
+
+@model MvcPL.Models.GenreEditViewModel
+
+@section main{
+    <div class="col-md-8 col-md-offset-2">
+        <h3>Delete Genre?</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <table class="del-table">
+                <tr>
+                    <td>
+                        <h3>@Model.Genre.Name</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Model.Genre.Description
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-group row">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Cancel", "Index", "Genres", null, new { @class = "btn btn-default btn-block form-btn" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-danger btn-block form-btn" value="Delete" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @Html.ValidationSummary(false)
+        }
+    </div>
+}
