@@ -52,5 +52,38 @@ namespace BLL.Services
         {
             return WebSecurity.Login(user.UserName, user.Password);
         }
+
+
+
+        public void MakeAdmin(BLLUser user)
+        {
+            SetRole(user.UserName, "Admin");
+        }
+
+        public void MakeModer(BLLUser user)
+        {
+            SetRole(user.UserName, "Moderator");
+        }
+
+        public void MakeUser(BLLUser user)
+        {
+            SetRole(user.UserName, "User");
+        }
+
+        private void ClearRoles(string name)
+        {
+            var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
+
+            roles.RemoveUsersFromRoles(new string[] { name }, roles.GetRolesForUser(name));
+        }
+
+        private void SetRole(string name, string role)
+        {
+            var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
+
+            ClearRoles(name);
+
+            roles.AddUsersToRoles(new string[] { name }, new string[] { role });
+        }
     }
 }

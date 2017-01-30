@@ -6,4 +6,13 @@
     @Html.ActionLink("Albums", "Index", "Albums", null, new { @class = "list-group-item list-group-item-action" })
     @Html.ActionLink("Tracks", "Index", "Songs", null, new { @class = "list-group-item list-group-item-action" })
     @Html.ActionLink("Genres", "Index", "Genres", null, new { @class = "list-group-item list-group-item-action" })
+    
+    @if (Request.IsAuthenticated)
+    {
+        if (Array.Exists((string[])ViewBag.Roles, element => element == "Admin"))
+        {
+            <hr />
+            @Html.ActionLink("Users", "Index", "Users", null, new { @class = "list-group-item list-group-item-action" })
+        }
+    }
 </div>

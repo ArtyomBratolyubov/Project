@@ -6,22 +6,22 @@ namespace MvcPL.Infrastructure.Mappers
 {
     public static class MvcMappers
     {
-        public static UserViewModel ToMvcUser(this BLLUser userEntity)
+        public static UserModel ToMvcUser(this BLLUser userEntity)
         {
-            return new UserViewModel()
+            return new UserModel()
             {
                 Id = userEntity.Id,
                 UserName = userEntity.UserName,
-                Role = (Role)userEntity.RoleId
+                //Role = (Role)userEntity.RoleId
             };
         }
-        public static BLLUser ToBllUser(this UserViewModel userViewModel)
+        public static BLLUser ToBllUser(this UserModel userViewModel)
         {
             return new BLLUser()
             {
                 Id = userViewModel.Id,
                 UserName = userViewModel.UserName,
-                RoleId = (int)userViewModel.Role
+                //RoleId = (int)userViewModel.Role
             };
         }
 

@@ -66,3 +66,9 @@ nav {
     width: auto;
     display: none;
 }
+
+.users-btn {
+    height: 90%;
+    position: relative;
+    bottom: 7px;
+}
