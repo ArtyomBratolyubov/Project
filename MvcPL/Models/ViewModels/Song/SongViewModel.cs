@@ -6,14 +6,12 @@ using System.Web;
 
 namespace MvcPL.Models
 {
-
-    public class SongsViewModel : BaseViewModel
+    public class SongViewModel : BaseViewModel
     {
-        public IEnumerable<SongModel> Songs { get; set; }
+        public SongModel Song { get; set; }
 
-        public int SongsCount { get; set; }
+        public IEnumerable<CommentSongModel> Comments { get; set; }
 
-        public int Pages { get; set; }
-
+        public CommentSongModel Comment { get; set; }
     }
 }

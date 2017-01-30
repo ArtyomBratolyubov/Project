@@ -21,6 +21,8 @@ namespace DAL.Interface.Repository
 
         IRepository<DalRateSong> RateSongRepository { get; }
 
+        IRepository<DalCommentSong> CommentSongRepository { get; }
+
         void Commit();
 
     }

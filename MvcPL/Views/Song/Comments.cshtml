@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MvcPL.Models.CommentSongModel>
+
+<div class="panel-group">
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (ViewBag.UserId == item.UserId || Array.Exists((string[])ViewBag.Roles, element => element == "Moderator"))
+                        {
+                            @Ajax.ActionLink(" ", "DeleteComment", new { commentId = item.Id, songId = item.SongId },
+                                     new AjaxOptions
+                                 {
+                                     UpdateTargetId = "Comments"
+          
+                                 },
+                                      new { @class = "glyphicon glyphicon-remove pull-right remove-icon" })
+                        }
+                    }
+                    @item.UserName - @item.DateAdded.Value.ToString()
+                </div>
+            </div>
+            <div id="collapse_@item.Id" class="panel">
+                <div class="panel-body">
+                    @item.Text
+                </div>
+            </div>
+        </div>
+    }
+</div>

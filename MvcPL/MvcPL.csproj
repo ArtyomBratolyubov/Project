@@ -178,6 +178,7 @@
     <Compile Include="Models\SimpleModels\Account\LoginModel.cs" />
     <Compile Include="Models\SimpleModels\Account\RegistrateModel.cs" />
     <Compile Include="Models\SimpleModels\Account\UserModel.cs" />
+    <Compile Include="Models\SimpleModels\Comments\CommentSongModel.cs" />
     <Compile Include="Models\SimpleModels\Music\SongModel.cs" />
     <Compile Include="Models\SimpleModels\Music\AlbumModel.cs" />
     <Compile Include="Models\SimpleModels\Music\GenreModel.cs" />
@@ -342,6 +343,8 @@
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Genres\Page.cshtml" />
     <Content Include="Views\Song\Rate.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Song\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

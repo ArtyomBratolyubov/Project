@@ -13,16 +13,14 @@ namespace MvcPL.Controllers
 {
     public class AlbumsController : _BaseController
     {
-        private IAlbumService albumService;
-        private ISingerService singerService;
         private IGenreService genreService;
 
         public AlbumsController(IAlbumService albumService, IUserService userService,
-            ISingerService singerService, IGenreService genreService)
-            : base(userService)
+            ISingerService singerService, IGenreService genreService,
+            ISongService songService, ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService, commentSongService)
         {
-            this.albumService = albumService;
-            this.singerService = singerService;
+
             this.genreService = genreService;
         }
 
@@ -50,7 +48,7 @@ namespace MvcPL.Controllers
             InitializeBaseModel(avm);
 
             return View(avm);
-            
+
         }
 
 
@@ -96,6 +94,6 @@ namespace MvcPL.Controllers
             return View("Index", avm);
         }
 
-       
+
     }
 }

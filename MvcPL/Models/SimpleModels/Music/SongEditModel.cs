@@ -13,7 +13,7 @@ namespace MvcPL.Models
 
         [Required]
         [Display(Name = "Name ")]
-        [StringLength(50, ErrorMessage = "Поле {0} должно быть не менее {2} and not more then {1} символов", MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = "{0} sould be at least {2} symbols long and not more then {1}", MinimumLength = 2)]
         public string Name { get; set; }
 
         [Display(Name = "Description ")]

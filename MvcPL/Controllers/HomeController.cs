@@ -11,19 +11,19 @@ namespace MvcPL.Controllers
 
     public class HomeController : _BaseController
     {
-        ISongService songService;
-        IAlbumService albumService;
+
         IGenreService genreService;
-        ISingerService singerService;
+        IRateSongService rateSongService;
 
         public HomeController(IUserService userService, ISongService songService,
-            IAlbumService albumService, IGenreService genreService, ISingerService singerService)
-            : base(userService)
+            IAlbumService albumService, IGenreService genreService,
+            ISingerService singerService, IRateSongService rateSongService,
+            ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService,commentSongService)
         {
-            this.songService = songService;
+
             this.genreService = genreService;
-            this.albumService = albumService;
-            this.singerService = singerService;
+            this.rateSongService = rateSongService;
         }
 
         public ActionResult Index()
@@ -41,6 +41,7 @@ namespace MvcPL.Controllers
                     m.SingerName = singerService.GetEntity(album.SingerId).Name;
                     m.GenreName = genreService.GetEntity(album.GenreId).Name;
                     m.GenreId = album.GenreId;
+                    m.Rating = rateSongService.GetRatingBySongId(m.Id);
 
                     return m;
                 }).Take(15);

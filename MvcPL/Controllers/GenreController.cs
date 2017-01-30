@@ -15,13 +15,15 @@ namespace MvcPL.Controllers
     {
         private IGenreService genreService;
 
-        public GenreController(IUserService userService, IGenreService genreService)
-            : base(userService)
+        public GenreController(IUserService userService, IGenreService genreService,
+            ISongService songService, IAlbumService albumService,
+            ISingerService singerService, ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService,commentSongService)
         {
             this.genreService = genreService;
         }
 
-        
+
 
         [HttpGet]
         [Authorize]

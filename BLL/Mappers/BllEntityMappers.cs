@@ -1,5 +1,6 @@
 ﻿using BLL.Interface.Entities;
 using DAL.Interface.DTO;
+using System;
 
 namespace BLL.Mappers
 {
@@ -170,6 +171,35 @@ namespace BLL.Mappers
                 UserId = dal.UserId,
                 SongId = dal.SongId,
                 Rate = dal.Rate
+            };
+        }
+
+
+        public static DalCommentSong ToDalCommentSong(this BLLCommentSong bll)
+        {
+            if (bll == null)
+                throw new ArgumentNullException("bll");
+
+            var dal = new DalCommentSong
+            {
+                Id = bll.Id,
+                UserId = bll.UserId,
+                SongId = bll.SongId,
+                Text = bll.Text,
+                DateAdded = bll.DateAdded
+            };
+
+            return dal;
+        }
+        public static BLLCommentSong ToBllCommentSong(this DalCommentSong dal)
+        {
+            return new BLLCommentSong
+            {
+                Id = dal.Id,
+                UserId = dal.UserId,
+                SongId = dal.SongId,
+                Text = dal.Text,
+                DateAdded = dal.DateAdded
             };
         }
     }

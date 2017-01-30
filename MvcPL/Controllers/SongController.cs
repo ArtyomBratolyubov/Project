@@ -13,20 +13,18 @@ namespace MvcPL.Controllers
 {
     public class SongController : _BaseController
     {
-        private IAlbumService albumService;
-        private ISingerService singerService;
+
         private IGenreService genreService;
-        private ISongService songService;
+
         private IRateSongService rateSongService;
 
         public SongController(IAlbumService albumService, IUserService userService,
             ISingerService singerService, ISongService songService,
-            IGenreService genreService, IRateSongService rateSongService)
-            : base(userService)
+            IGenreService genreService, IRateSongService rateSongService,
+            ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService,commentSongService)
         {
-            this.albumService = albumService;
-            this.singerService = singerService;
-            this.songService = songService;
+
             this.genreService = genreService;
             this.rateSongService = rateSongService;
         }
@@ -39,24 +37,8 @@ namespace MvcPL.Controllers
 
             SongViewModel aevm = new SongViewModel();
 
-            aevm.Song = songService.GetEntity((int)Id).ToMvcSong();
 
-            AlbumModel album = albumService.GetEntity(aevm.Song.AlbumId).ToMvcAlbum();
-
-            aevm.Song.AlbumName = album.Name;
-
-            aevm.Song.GenreName = genreService.GetEntity(album.GenreId).Name;
-
-            aevm.Song.SingerName = singerService.GetEntity(album.SingerId).Name;
-
-            aevm.Song.AlbumId = album.Id;
-
-            aevm.Song.SingerId = album.SingerId;
-
-            aevm.Song.GenreId = album.GenreId;
-
-
-            aevm.Song.Rating = rateSongService.GetRatingBySongId(aevm.Song.Id);
+            Initialize(aevm, Id);
 
             InitializeBaseModel(aevm);
 
@@ -229,7 +211,7 @@ namespace MvcPL.Controllers
                 Rate = (int)rate
             };
 
-            rateSongService.Create(rating.ToBllSong());
+            rateSongService.Create(rating.ToBllRateSong());
 
             var songModel = new SongModel();
 
@@ -242,7 +224,86 @@ namespace MvcPL.Controllers
 
             SongViewModel aevm = new SongViewModel();
 
-            aevm.Song = songService.GetEntity((int)songId).ToMvcSong();
+            Initialize(aevm, songId);
+
+            InitializeBaseModel(aevm);
+
+            return View("Index", aevm);
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddComent(int? songId, SongViewModel svm)
+        {
+            InitializeBaseModel(svm);
+
+
+            var c = svm.Comment;
+
+            if (!string.IsNullOrEmpty(c.Text))
+            {
+                c.DateAdded = DateTime.Now;
+
+                c.UserId = svm.UserId;
+
+                c.SongId = (int)songId;
+
+
+
+                commentSongService.Create(c.ToBllCommentSong());
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                svm.Comments = commentSongService.GetAllEntities()
+                    .Where(m => m.SongId == songId)
+                    .Select(m => m.ToMvcCommentSong())
+                    .Select(m =>
+                    {
+                        m.UserName = UserService.GetUserEntity(m.UserId).UserName;
+                        return m;
+                    });
+
+                return PartialView("Comments", svm.Comments);
+            }
+
+            Initialize(svm, songId);
+
+            return View("Index", svm);
+
+        }
+
+        [Authorize]
+        public ActionResult DeleteComment(int? commentId, int? songId, SongViewModel svm)
+        {
+            InitializeBaseModel(svm);
+
+            commentSongService.Delete((int)commentId);
+
+            if (Request.IsAjaxRequest())
+            {
+                svm.Comments = commentSongService.GetAllEntities()
+                    .Where(m => m.SongId == songId)
+                    .Select(m => m.ToMvcCommentSong())
+                    .Select(m =>
+                    {
+                        m.UserName = UserService.GetUserEntity(m.UserId).UserName;
+                        return m;
+                    });
+
+                return PartialView("Comments", svm.Comments);
+            }
+
+            Initialize(svm, songId);
+
+            return View("Index", svm);
+
+        }
+
+        private void Initialize(SongViewModel aevm, int? Id)
+        {
+            aevm.Song = songService.GetEntity((int)Id).ToMvcSong();
 
             AlbumModel album = albumService.GetEntity(aevm.Song.AlbumId).ToMvcAlbum();
 
@@ -261,10 +322,14 @@ namespace MvcPL.Controllers
 
             aevm.Song.Rating = rateSongService.GetRatingBySongId(aevm.Song.Id);
 
-            InitializeBaseModel(aevm);
-
-            return View("Index", aevm);
-
+            aevm.Comments = commentSongService.GetAllEntities()
+                .Where(m => (m.SongId == Id))
+                .Select(m => m.ToMvcCommentSong())
+                .Select(m =>
+                {
+                    m.UserName = UserService.GetUserEntity(m.UserId).UserName;
+                    return m;
+                });
         }
     }
 }

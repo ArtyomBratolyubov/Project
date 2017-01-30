@@ -13,21 +13,19 @@ namespace MvcPL.Controllers
 {
     public class SongsController : _BaseController
     {
-        private IAlbumService albumService;
-        private ISingerService singerService;
+
         private IGenreService genreService;
-        private ISongService songService;
         private IRateSongService rateSongService;
 
         public SongsController(IAlbumService albumService, IUserService userService,
             ISingerService singerService, IGenreService genreService,
-            ISongService songService, IRateSongService rateSongService)
-            : base(userService)
+            ISongService songService, IRateSongService rateSongService,
+            ICommentSongService commentSongService)
+            : base(userService,songService,singerService,albumService,commentSongService)
         {
-            this.albumService = albumService;
-            this.singerService = singerService;
+
             this.genreService = genreService;
-            this.songService = songService;
+
             this.rateSongService = rateSongService;
         }
 

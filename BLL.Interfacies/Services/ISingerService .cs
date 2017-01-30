@@ -15,6 +15,8 @@ namespace BLL.Interface.Services
         void Delete(int Id);
 
         void Update(BLLSinger e, HttpPostedFileBase file);
+
+        
     }
 }
 

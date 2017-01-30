@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DalCommentSong.cs" />
     <Compile Include="DTO\DalRateSong.cs" />
     <Compile Include="DTO\DalSong.cs" />
     <Compile Include="DTO\DalFile.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
     <Compile Include="Interface\IRateSongRepository.cs" />
+    <Compile Include="Interface\ICommentSongRepository.cs" />
     <Compile Include="Interface\ISongRepository.cs" />
     <Compile Include="Interface\IFileRepository.cs" />
     <Compile Include="Interface\IGenreRepository.cs" />

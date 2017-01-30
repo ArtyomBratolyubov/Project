@@ -6,13 +6,13 @@ namespace ORM
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Comment
+    public partial class CommentSong
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(300)]
         public string Text { get; set; }
 
 
@@ -23,9 +23,12 @@ namespace ORM
 
         [ForeignKey("Song")]
         public int? SongId { get; set; }
+        [Required]
         public virtual Song Song { get; set; }
 
-
+        [Required]
+        [Column(TypeName = "datetime2")]
+        public DateTime? DateAdded { get; set; }
     }
 }
 

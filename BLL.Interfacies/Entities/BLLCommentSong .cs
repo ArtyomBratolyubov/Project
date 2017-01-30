@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BLL.Interface.Entities
 {
-    public class BLLCommentSong
+    public class BLLRateSong
     {
         public int Id { get; set; }
 
@@ -9,9 +9,7 @@ namespace BLL.Interface.Entities
 
         public int UserId { get; set; }
 
-        public string Text { get; set; }
-
-        public DateTime? DateAdded { get; set; }
+        public int Rate { get; set; }
     }
 }
 

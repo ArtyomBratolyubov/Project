@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
-    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\CommentSong.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\File.cs" />
     <Compile Include="Entities\RateAlbum.cs" />
@@ -71,9 +71,21 @@
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityModel.cs" />
-    <Compile Include="Migrations\201701292005386_v1.cs" />
-    <Compile Include="Migrations\201701292005386_v1.Designer.cs">
-      <DependentUpon>201701292005386_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201701292254060_v1.cs" />
+    <Compile Include="Migrations\201701292254060_v1.Designer.cs">
+      <DependentUpon>201701292254060_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701301029530_v2.cs" />
+    <Compile Include="Migrations\201701301029530_v2.Designer.cs">
+      <DependentUpon>201701301029530_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701301031143_v3.cs" />
+    <Compile Include="Migrations\201701301031143_v3.Designer.cs">
+      <DependentUpon>201701301031143_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701301032553_v4.cs" />
+    <Compile Include="Migrations\201701301032553_v4.Designer.cs">
+      <DependentUpon>201701301032553_v4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,8 +95,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701292005386_v1.resx">
-      <DependentUpon>201701292005386_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701292254060_v1.resx">
+      <DependentUpon>201701292254060_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701301029530_v2.resx">
+      <DependentUpon>201701301029530_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701301031143_v3.resx">
+      <DependentUpon>201701301031143_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701301032553_v4.resx">
+      <DependentUpon>201701301032553_v4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

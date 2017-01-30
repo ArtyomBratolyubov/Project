@@ -13,12 +13,13 @@ namespace MvcPL.Controllers
 {
     public class SingersController : _BaseController
     {
-        ISingerService singerService;
 
-        public SingersController(ISingerService singerService, IUserService userService)
-            : base(userService)
+        public SingersController(ISingerService singerService, IUserService userService,
+            ISongService songService, IAlbumService albumService,
+            ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService,commentSongService)
         {
-            this.singerService = singerService;
+
         }
 
         [HttpGet]
@@ -68,6 +69,6 @@ namespace MvcPL.Controllers
             return View("Index", svm);
         }
 
-       
+
     }
 }

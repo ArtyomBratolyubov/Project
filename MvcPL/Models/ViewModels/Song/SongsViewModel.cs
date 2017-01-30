@@ -7,9 +7,13 @@ using System.Web;
 namespace MvcPL.Models
 {
 
-    public class SongViewModel : BaseViewModel
+    public class SongsViewModel : BaseViewModel
     {
-        public SongModel Song { get; set; }
+        public IEnumerable<SongModel> Songs { get; set; }
+
+        public int SongsCount { get; set; }
+
+        public int Pages { get; set; }
 
     }
 }

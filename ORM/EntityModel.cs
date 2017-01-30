@@ -19,7 +19,7 @@ namespace ORM
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Singer> Singers { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<CommentSong> CommentsSong { get; set; }
         public virtual DbSet<RateSong> RateSongs { get; set; }
         public virtual DbSet<RateAlbum> RateAlbums { get; set; }
         public virtual DbSet<Album> Albums { get; set; }

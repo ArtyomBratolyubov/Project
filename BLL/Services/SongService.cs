@@ -118,5 +118,30 @@ namespace BLL.Services
         }
 
         #endregion
+
+
+        public IEnumerable<BLLSong> GetMostRatedSongs(int count)
+        {
+            var rates = uow.RateSongRepository.GetAll().GroupBy(m => m.SongId);
+
+            foreach (var i in rates.OrderByDescending(m => m.Average(m1 => m1.Rate)).Take(count))
+            {
+                int id = i.Select(m => m.SongId).First();
+
+                yield return uow.SongRepository.GetById(id).ToBllSong();
+            }
+        }
+
+        public IEnumerable<BLLSong> GetMostCommentedSongs(int count)
+        {
+            var com = uow.CommentSongRepository.GetAll().GroupBy(m => m.SongId);
+
+            foreach (var i in com.OrderByDescending(m => m.Count()).Take(count))
+            {
+                int id = i.Select(m => m.SongId).First();
+
+                yield return uow.SongRepository.GetById(id).ToBllSong();
+            }
+        }
     }
 }

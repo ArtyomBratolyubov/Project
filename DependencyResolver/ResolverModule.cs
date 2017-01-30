@@ -52,6 +52,9 @@ namespace DependencyResolver
 
             kernel.Bind<IRateSongRepository>().To<RateSongRepository>();
             kernel.Bind<IRateSongService>().To<RateSongService>();
+
+            kernel.Bind<ICommentSongRepository>().To<CommentSongRepository>();
+            kernel.Bind<ICommentSongService>().To<CommentSongService>();
         }
     }
 }

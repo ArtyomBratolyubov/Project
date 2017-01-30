@@ -63,12 +63,31 @@
                 </td>
             </tr>
         </table>
+        @using (Ajax.BeginForm("AddComent", new { songId = Model.Song.Id }, new AjaxOptions
+            {
+                UpdateTargetId = "Comments",
+                HttpMethod = "Post",
+                OnSuccess = "clearForm"
+            }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.TextAreaFor(m => m.Comment.Text, new { @class = "form-control", @type = "text", @rows = "4" })
+            <input type="submit" class="btn btn-success btn-block form-btn" value="Add comment" />
+            @Html.ValidationSummary()
+        }
+        <div id="Comments">
+            @Html.Partial("Comments", Model.Comments)
+        </div>
 
     </div>
 }
 
 @section scripts
 {
-    @*Ненавязивый JavaScript для выполнения запроса на сервер без полного обновления страницы*@
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function clearForm() {
+            $('input[type=text], textarea').val('');
+        }
+    </script>
 }

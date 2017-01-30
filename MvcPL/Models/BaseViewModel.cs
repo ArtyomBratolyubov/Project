@@ -11,6 +11,8 @@ namespace MvcPL.Models
     {
         public IEnumerable<SongEditModel> TopRatedSongs { get; set; }
 
+        public IEnumerable<SongEditModel> TopCommentedSongs { get; set; }
+
         public int UserId { get; set; }
 
         public string[] Roles { get; set; }

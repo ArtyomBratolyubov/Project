@@ -105,10 +105,10 @@ namespace ORM.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Text = c.String(nullable: false, maxLength: 200),
                         UserId = c.Int(),
-                        SongId = c.Int(),
+                        SongId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Songs", t => t.SongId)
+                .ForeignKey("dbo.Songs", t => t.SongId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.SongId);

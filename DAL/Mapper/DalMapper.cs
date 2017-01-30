@@ -182,5 +182,33 @@ namespace DAL.Interfacies.DTO
                 Mark = dal.Rate
             };
         }
+
+        public static DalCommentSong ToDalCommentSong(this CommentSong orm)
+        {
+            if (orm == null)
+                throw new ArgumentNullException("orm");
+
+            var dal = new DalCommentSong
+            {
+                Id = orm.Id,
+                UserId = orm.UserId ?? 0,
+                SongId = orm.SongId ?? 0,
+                Text = orm.Text,
+                DateAdded = orm.DateAdded
+            };
+
+            return dal;
+        }
+        public static CommentSong ToOrmCommentSong(this DalCommentSong dal)
+        {
+            return new CommentSong
+            {
+                Id = dal.Id,
+                UserId = dal.UserId,
+                SongId = dal.SongId,
+                Text = dal.Text,
+                DateAdded = dal.DateAdded
+            };
+        }
     }
 }

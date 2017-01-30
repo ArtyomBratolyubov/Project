@@ -16,8 +16,10 @@ namespace MvcPL.Controllers
     public class AccountController : _BaseController
     {
 
-        public AccountController(IUserService userService)
-            : base(userService)
+        public AccountController(IUserService userService, ISongService songService,
+            IAlbumService albumService, ISingerService singerService,
+            ICommentSongService commentSongService)
+            : base(userService, songService, singerService, albumService, commentSongService)
         {
 
         }
@@ -47,7 +49,7 @@ namespace MvcPL.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Неверный Login и/или Password");
+            ModelState.AddModelError("", "Wrong Login or Password");
             InitializeBaseModel(model);
             return View(model);
         }
@@ -101,7 +103,7 @@ namespace MvcPL.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "Login уже используется. Пожалуйста ридумайте другой.";
+                    return "User name already exists. Please enter a different user name.";
 
                 case MembershipCreateStatus.DuplicateEmail:
                     return "A user name for that e-mail address already exists. Please enter a different e-mail address.";

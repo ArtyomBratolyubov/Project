@@ -15,6 +15,10 @@ namespace BLL.Interface.Services
         void Delete(int Id);
 
         void Update(BLLSong e, HttpPostedFileBase file);
+
+        IEnumerable<BLLSong> GetMostRatedSongs(int count);
+
+        IEnumerable<BLLSong> GetMostCommentedSongs(int count);
     }
 }
 

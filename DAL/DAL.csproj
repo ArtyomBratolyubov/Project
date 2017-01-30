@@ -52,6 +52,7 @@
     <Compile Include="Repositories\GenreRepository .cs" />
     <Compile Include="Repositories\FileRepository.cs" />
     <Compile Include="Repositories\AlbumRepository.cs" />
+    <Compile Include="Repositories\CommentSongRepository.cs" />
     <Compile Include="Repositories\RateSongRepository .cs" />
     <Compile Include="Repositories\SongRepository.cs" />
     <Compile Include="Repositories\SingerRepository.cs" />

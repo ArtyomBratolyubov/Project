@@ -1,9 +1,17 @@
-﻿<div class="panel panel-default">
-    <div class="panel-heading">Самые обсуждаемые</div>
-    <div class="panel-body">some text</div>
+﻿
+
+<div class="panel panel-default">
+    <div class="panel-heading">Top rated songs</div>
+    @foreach (var item in (IEnumerable<MvcPL.Models.SongModel>)Model.TopRatedSongs)
+    {
+        @Html.ActionLink(item.SingerName + " - " + item.Name, "Index", "Song", new { id = item.Id }, new { @class = "list-group-item list-group-item-action" })
+    }
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Ratingовые</div>
-    <div class="panel-body">some text</div>
+    <div class="panel-heading">Top commented songs</div>
+    @foreach (var item in (IEnumerable<MvcPL.Models.SongModel>)Model.TopCommentedSongs)
+    {
+        @Html.ActionLink(item.SingerName + " - " + item.Name, "Index", "Song", new { id = item.Id }, new { @class = "list-group-item list-group-item-action" })
+    }
 </div>

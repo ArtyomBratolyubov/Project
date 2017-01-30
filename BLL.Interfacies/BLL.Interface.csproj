@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BLLCommentSong .cs" />
     <Compile Include="Entities\BLLRateSong.cs" />
     <Compile Include="Entities\BLLSong.cs" />
     <Compile Include="Entities\BLLAlbum.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Entities\BLLFile.cs" />
     <Compile Include="Entities\BLLEntity.cs" />
     <Compile Include="Services\IGenreService.cs" />
+    <Compile Include="Services\ICommentSongService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\IAlbumService.cs" />

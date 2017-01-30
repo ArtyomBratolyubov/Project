@@ -42,8 +42,8 @@ namespace MvcPL.Infrastructure.Mappers
             {
                 Id = genreModel.Id,
                 Name = genreModel.Name,
-                Description=genreModel.Description,
-                AuthorId=genreModel.AuthorId
+                Description = genreModel.Description,
+                AuthorId = genreModel.AuthorId
             };
         }
         public static BLLGenre ToBllGenre(this GenreModel genreModel, int Author)
@@ -197,7 +197,7 @@ namespace MvcPL.Infrastructure.Mappers
             };
         }
 
-        public static RateSongModel ToMvcSong(this BLLRateSong Entity)
+        public static RateSongModel ToMvcRateSong(this BLLRateSong Entity)
         {
             return new RateSongModel()
             {
@@ -207,7 +207,7 @@ namespace MvcPL.Infrastructure.Mappers
                 Rate = Entity.Rate
             };
         }
-        public static BLLRateSong ToBllSong(this RateSongModel dal)
+        public static BLLRateSong ToBllRateSong(this RateSongModel dal)
         {
             return new BLLRateSong()
             {
@@ -215,6 +215,29 @@ namespace MvcPL.Infrastructure.Mappers
                 UserId = dal.UserId,
                 SongId = dal.SongId,
                 Rate = dal.Rate
+            };
+        }
+
+        public static CommentSongModel ToMvcCommentSong(this BLLCommentSong Entity)
+        {
+            return new CommentSongModel()
+            {
+                Id = Entity.Id,
+                UserId = Entity.UserId,
+                SongId = Entity.SongId,
+                DateAdded = Entity.DateAdded,
+                Text = Entity.Text
+            };
+        }
+        public static BLLCommentSong ToBllCommentSong(this CommentSongModel dal)
+        {
+            return new BLLCommentSong()
+            {
+                Id = dal.Id,
+                UserId = dal.UserId,
+                SongId = dal.SongId,
+                DateAdded = dal.DateAdded,
+                Text = dal.Text
             };
         }
     }

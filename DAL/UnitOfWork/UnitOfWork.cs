@@ -27,6 +27,8 @@ namespace DAL.Concrete
 
         IRepository<DalRateSong> rateSongRepository;
 
+        IRepository<DalCommentSong> commentSongRepository;
+
 
         public IRepository<DalGenre> GenreRepository
         {
@@ -100,6 +102,17 @@ namespace DAL.Concrete
             }
         }        
 
+        public IRepository<DalCommentSong> CommentSongRepository 
+             {
+            get
+            {
+                if (this.commentSongRepository == null)
+                {
+                    this.commentSongRepository = new DAL.Concrete.CommentSongRepository(Context);
+                }
+                return commentSongRepository;
+            }
+        }     
 
         public UnitOfWork(DbContext context)
         {
