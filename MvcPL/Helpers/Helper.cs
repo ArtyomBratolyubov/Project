@@ -12,7 +12,7 @@ namespace MvcPL.Helpers
         public static int GetCountOfPages(int count)
         {
             int pages = count / pageSize;
-            return pages % pageSize == 0 ? pages : pages + 1;
+            return count % pageSize == 0 ? pages : pages + 1;
         }
 
         public static bool CheckImae(HttpPostedFileBase file)

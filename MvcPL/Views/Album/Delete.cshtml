@@ -10,41 +10,49 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <table class="del-table">
+            <h3><b>@Model.Album.Name</b></h3>
+            <table class="table">
                 <tr>
-                    <td rowspan="4">
+                    <td rowspan="5">
                         <img src="~/File/GetFile/0@{@Model.Album.ImageId}" class="img" />
                     </td>
                     <td>
-                        <h3>@Model.Album.Name</h3>
+                        <b>Singer: </b>
                     </td>
-                </tr>
-                <tr>
                     <td>
-                        <label>Genre</label><br />
-                        @Model.Album.GenreName
+                        @Html.ActionLink(Model.Album.SingerName, "Index", "Singer", new { Id = Model.Album.SingerId }, new { @class = "panel-title" })
                     </td>
                 </tr>
                 @if (Model.Album.DateOut != null)
                 {
                     <tr>
                         <td>
-                            @Html.LabelFor(m => m.Album.DateOut, null, new { @class = "" })<br />
+                            <b>Date out: </b>
+                        </td>
+                        <td>
                             @Model.Album.DateOut.Value.ToString("D")
                         </td>
                     </tr>
                 }
                 <tr>
                     <td>
-                        <label>Singer</label><br />
-                        @Model.Album.SingerName
+                        <b>Genre: </b>
+                    </td>
+                    <td>
+                        @Model.Album.GenreName
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <br />@Model.Album.Description
-                    </td>
-                </tr>
+                @if (!string.IsNullOrEmpty(Model.Album.Description))
+                {
+                    <tr>
+                        <td>
+                            <b>Description: </b>
+                        </td>
+                        <td>
+                            @Model.Album.Description
+                        </td>
+                    </tr>
+                }
             </table>
 
             <div class="form-group row">

@@ -7,6 +7,7 @@
 @section main{
     <div class="col-md-10 col-md-offset-1">
         <h3>Latest</h3>
+        <hr />
         <div class="panel-group" id="accordion">
             @foreach (var item in Model.LastAddedSongs)
             {
@@ -39,7 +40,7 @@
                                         <b>Album: </b>
                                     </td>
                                     <td>
-                                        @Html.ActionLink(item.AlbumName, "Index", "Album", new { Id = item.SingerId }, new { @class = "panel-title" })
+                                        @Html.ActionLink(item.AlbumName, "Index", "Album", new { Id = item.AlbumId }, new { @class = "panel-title" })
                                     </td>
                                 </tr>
                                 <tr>

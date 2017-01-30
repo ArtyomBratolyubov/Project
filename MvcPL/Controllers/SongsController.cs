@@ -62,7 +62,7 @@ namespace MvcPL.Controllers
                     m.Rating = rateSongService.GetRatingBySongId(m.Id);
 
                     return m;
-                }).OrderBy(m => m.Name).OrderBy(m => m.SingerName);
+                }).OrderBy(m => m.SingerName).ThenBy(m => m.Name);
 
             InitializeBaseModel(avm);
 
@@ -99,7 +99,7 @@ namespace MvcPL.Controllers
                     m.Rating = rateSongService.GetRatingBySongId(m.Id);
 
                     return m;
-                }).OrderBy(m => m.Name).OrderBy(m => m.SingerName);
+                }).OrderBy(m => m.SingerName).ThenBy(m => m.Name);
 
             if (Request.IsAjaxRequest())
                 return PartialView(sm);

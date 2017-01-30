@@ -3,22 +3,26 @@
 @section main{
     <div class="panel-group">
         @foreach (var item in Model.Users)
-        { <div class="panel panel-default">
-            <div class="panel-heading">
-                @item.UserName
-                (
-                @foreach (var r in item.Roles)
-                {
-                    <span>@r</span>
-                }
-                )
-                <div class="pull-right">
-                    @Html.ActionLink("User", "MakeUser", "Users", new { userId = item.Id }, new { @class = "btn btn-primary users-btn" })
-                    @Html.ActionLink("Moderator", "MakeModer", "Users", new { userId = item.Id }, new { @class = "btn btn-warning users-btn" })
-                    @Html.ActionLink("Admin", "MakeAdmin", "Users", new { userId = item.Id }, new { @class = "btn btn-danger users-btn" })
+        {
+            if (item.Id != Model.UserId)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @item.UserName
+                        (
+                        @foreach (var r in item.Roles)
+                        {
+                            <span>@r</span>
+                        }
+                        )
+                        <div class="pull-right">
+                            @Html.ActionLink("User", "MakeUser", "Users", new { userId = item.Id }, new { @class = "btn btn-primary users-btn" })
+                            @Html.ActionLink("Moderator", "MakeModer", "Users", new { userId = item.Id }, new { @class = "btn btn-warning users-btn" })
+                            @Html.ActionLink("Admin", "MakeAdmin", "Users", new { userId = item.Id }, new { @class = "btn btn-danger users-btn" })
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            }
         }
     </div>
 }

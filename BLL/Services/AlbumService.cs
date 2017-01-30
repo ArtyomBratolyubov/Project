@@ -110,10 +110,9 @@ namespace BLL.Services
         public IEnumerable<BLLAlbum> GetAlbumsOnPage(int pageSize = 10, int page = 1)
         {
             return uow.AlbumRepository.GetAll()
+                .OrderBy(Album => Album.Name)
                 .Skip((page - 1) * pageSize)
-                 .Take(pageSize).Select(Album => Album.ToBllAlbum())
-                   .OrderBy(Album => Album.Name)
-                     ;
+                 .Take(pageSize).Select(Album => Album.ToBllAlbum());
 
         }
 

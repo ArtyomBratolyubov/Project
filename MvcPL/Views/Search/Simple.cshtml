@@ -1,0 +1,31 @@
+﻿@model MvcPL.Models.SimpleSearchViewModel
+
+@section main{
+    <div class="col-md-10 col-md-offset-1">
+        @using (Ajax.BeginForm("Simple", new { q = Model.Text }, new AjaxOptions
+            {
+                UpdateTargetId = "Resaults",
+                LoadingElementId = "loadingIndicator"
+            }
+            )
+        )
+        {
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Text, null, new { @class = "form-control", @type = "text", @placeholder = "" })
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <button type="submit" class="btn btn-danger">
+                            <img src="~/Content/images/loader.gif" class="load-img" id="loadingIndicator">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true">
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div id="Resaults">
+            @Html.Partial("Resaults")
+        </div>
+    </div>
+}

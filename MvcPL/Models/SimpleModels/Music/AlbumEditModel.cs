@@ -35,6 +35,7 @@ namespace MvcPL.Models
         [Display(Name = "Genre ")]
         public int GenreId { get; set; }
 
+        [Required]
         [Display(Name = "Date out ")]
         public DateTime? DateOut { get; set; }
 

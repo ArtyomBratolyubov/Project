@@ -154,6 +154,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
@@ -187,8 +188,11 @@
     <Compile Include="Models\SimpleModels\Music\SingerModel.cs" />
     <Compile Include="Models\SimpleModels\Music\SongEditModel.cs" />
     <Compile Include="Models\SimpleModels\Rates\RateSongModel.cs" />
+    <Compile Include="Models\SimpleModels\Search\ExtendedSongSearchModel.cs" />
     <Compile Include="Models\ViewModels\Account\UsersViewModel.cs" />
     <Compile Include="Models\ViewModels\Genre\GenresViewModel .cs" />
+    <Compile Include="Models\ViewModels\Search\ExtendedSongSearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\Search\SimpleSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\Song\SongViewModel.cs" />
     <Compile Include="Models\ViewModels\Song\SongsViewModel.cs" />
     <Compile Include="Models\ViewModels\Song\SongEditViewModel .cs" />
@@ -278,12 +282,15 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
@@ -321,7 +328,6 @@
     <Content Include="Views\Shared\_navBar.cshtml" />
     <Content Include="Views\Shared\_rightBar.cshtml" />
     <Content Include="Views\Shared\_songView.cshtml" />
-    <Content Include="Views\Shared\_searchBox.cshtml" />
     <Content Include="Views\Singer\Delete.cshtml" />
     <Content Include="Views\Singer\Edit.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
@@ -345,9 +351,12 @@
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Genres\Page.cshtml" />
     <Content Include="Views\Song\Rate.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Simple.cshtml" />
     <Content Include="Views\Song\Comments.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Search\Resaults.cshtml" />
+    <Content Include="Views\Search\ExtendedSong.cshtml" />
+    <Content Include="Views\Search\SongResaults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

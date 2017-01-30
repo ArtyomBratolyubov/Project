@@ -17,15 +17,14 @@ namespace MvcPL
 
             bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
                         "~/Content/bootstrap.css",
-                        "~/Content/bootstrap-responsive.min.css"));   
+                        "~/Content/bootstrap-responsive.min.css"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive-ajax.js",
-                        "~/Scripts/jquery.validate.js",
+                         "~/Scripts/jquery.validate.js",
                          "~/Scripts/jquery.validate.unobtrusive.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

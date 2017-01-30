@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Song.AlbumId, null, new { @class = "text" })
-                @Html.DropDownListFor(m => m.Song.AlbumId, new SelectList(Model.Albums, "Id", "Name"), new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Song.AlbumId, Model.AlbumsOptions, new { @class = "form-control" })
             </div>
             <div class="form-group ">
                 @Html.LabelFor(m => m.Song.Description, null, new { @class = "" })

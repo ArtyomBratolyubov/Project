@@ -1,0 +1,98 @@
+﻿@model MvcPL.Models.ExtendedSongSearchViewModel
+
+@section main{
+    <div class="col-lg-10 col-lg-offset-1 ">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse">Extended song search</a>
+                        <img src="~/Content/images/loader.gif" class="load-img" id="loadingIndicator">
+                    </h4>
+                </div>
+                <div id="collapse" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        @using (Ajax.BeginForm("SongResaults", new AjaxOptions
+                            {
+                                UpdateTargetId = "SongResaults",
+                                LoadingElementId = "loadingIndicator",
+                                HttpMethod = "Post",
+                                OnSuccess = "collapseForm"
+                            }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group ">
+                                @Html.LabelFor(m => m.SearchModel.Name, null, new { @class = "" })
+                                @Html.TextBoxFor(m => m.SearchModel.Name, null, new { @class = "form-control", @type = "text" })
+                            </div>
+
+                            <label class="">Date</label>
+                            <div class="form-group row">
+                                <div>
+                                    <div class="col-lg-6">
+                                        @Html.TextBoxFor(m => m.SearchModel.DateFrom, null, new { @class = "form-control", @type = "date" })
+                                        @Html.LabelFor(m => m.SearchModel.DateFrom, null, new { @class = "form-text text-muted" })
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @Html.TextBoxFor(m => m.SearchModel.DateTo, null, new { @class = "form-control", @type = "date" })
+                                        @Html.LabelFor(m => m.SearchModel.DateTo, null, new { @class = "form-text text-muted" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="">Rate</label>
+                            <div class="form-group row">
+                                <div>
+                                    <div class="col-lg-6">
+                                        @Html.TextBoxFor(m => m.SearchModel.RateFrom, null, new { @class = "form-control", @type = "number", @min = "0", @max = "5" })
+                                        @Html.LabelFor(m => m.SearchModel.RateFrom, null, new { @class = "form-text text-muted" })
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @Html.TextBoxFor(m => m.SearchModel.RateTo, null, new { @class = "form-control", @type = "number", @min = "0", @max = "5" })
+                                        @Html.LabelFor(m => m.SearchModel.RateTo, null, new { @class = "form-text text-muted" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                @Html.LabelFor(m => m.SearchModel.SelectedGenres, null, new { @class = "text" })
+                                @Html.ListBoxFor(m => m.SearchModel.SelectedGenres, new SelectList(Model.Genres, "Id", "Name"), new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <b>Has music file attached </b>
+                                @Html.CheckBoxFor(m => m.SearchModel.HasMusic, new { })
+                            </div>
+                            <div class="form-group ">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td>
+                                            <input type="submit" class="btn btn-success btn-block form-btn" value="Search" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            @Html.ValidationSummary(false)
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="SongResaults" class="panel-group">
+            @Html.Partial("SongResaults")
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        function collapseForm() {
+           
+            $("#collapse").collapse('hide');
+           
+        }
+    </script>
+}

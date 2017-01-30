@@ -22,7 +22,7 @@ namespace MvcPL.Controllers
             ISingerService singerService, ISongService songService,
             IGenreService genreService, IRateSongService rateSongService,
             ICommentSongService commentSongService)
-            : base(userService, songService, singerService, albumService,commentSongService)
+            : base(userService, songService, singerService, albumService, commentSongService)
         {
 
             this.genreService = genreService;
@@ -55,7 +55,23 @@ namespace MvcPL.Controllers
 
             aevm.Albums = albumService.GetAllEntities()
                                      .Select(m => m.ToMvcAlbum())
-                                     .OrderBy(m => m.Name);
+                                     .Select(m =>
+                                     {
+                                         m.SingerName = singerService.GetEntity(m.SingerId).Name;
+                                         return m;
+                                     })
+                                     .OrderBy(m => m.SingerName)
+                                     .ThenBy(m => m.Name);
+
+            aevm.AlbumsOptions = aevm.Albums.Select(i =>
+            {
+                var s = new SelectListItem();
+
+                s.Text = i.SingerName + " - " + i.Name;
+                s.Value = i.Id.ToString();
+
+                return s;
+            });
 
             InitializeBaseModel(aevm);
 
@@ -82,8 +98,24 @@ namespace MvcPL.Controllers
             aevm.Singers = singerService.GetAllEntities().Select(m => m.ToMvcSinger()).OrderBy(m => m.Name);
 
             aevm.Albums = albumService.GetAllEntities()
-                .Select(m => m.ToMvcAlbum())
-                .OrderBy(m => m.Name);
+                                     .Select(m => m.ToMvcAlbum())
+                                     .Select(m =>
+                                     {
+                                         m.SingerName = singerService.GetEntity(m.SingerId).Name;
+                                         return m;
+                                     })
+                                     .OrderBy(m => m.SingerName)
+                                     .ThenBy(m => m.Name);
+
+            aevm.AlbumsOptions = aevm.Albums.Select(i =>
+            {
+                var s = new SelectListItem();
+
+                s.Text = i.SingerName + " - " + i.Name;
+                s.Value = i.Id.ToString();
+
+                return s;
+            });
 
             return View(aevm);
         }
@@ -155,8 +187,24 @@ namespace MvcPL.Controllers
                 AlbumModel album = albumService.GetEntity(aevm.Song.AlbumId).ToMvcAlbum();
 
                 aevm.Albums = albumService.GetAllEntities()
-                                                     .Select(m => m.ToMvcAlbum())
-                                                     .OrderBy(m => m.Name);
+                                     .Select(m => m.ToMvcAlbum())
+                                     .Select(m =>
+                                     {
+                                         m.SingerName = singerService.GetEntity(m.SingerId).Name;
+                                         return m;
+                                     })
+                                     .OrderBy(m => m.SingerName)
+                                     .ThenBy(m => m.Name);
+
+                aevm.AlbumsOptions = aevm.Albums.Select(i =>
+                {
+                    var s = new SelectListItem();
+
+                    s.Text = i.SingerName + " - " + i.Name;
+                    s.Value = i.Id.ToString();
+
+                    return s;
+                });
 
 
                 InitializeBaseModel(aevm);
@@ -178,6 +226,32 @@ namespace MvcPL.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditConfirmed(SongEditViewModel aevm, int? Id, HttpPostedFileBase File = null)
         {
+            InitializeBaseModel(aevm);
+
+            AlbumModel album = albumService.GetEntity(aevm.Song.AlbumId).ToMvcAlbum();
+
+            aevm.Albums = albumService.GetAllEntities()
+                                     .Select(m => m.ToMvcAlbum())
+                                     .Select(m =>
+                                     {
+                                         m.SingerName = singerService.GetEntity(m.SingerId).Name;
+                                         return m;
+                                     })
+                                     .OrderBy(m => m.SingerName)
+                                     .ThenBy(m => m.Name);
+
+            aevm.AlbumsOptions = aevm.Albums.Select(i =>
+            {
+                var s = new SelectListItem();
+
+                s.Text = i.SingerName + " - " + i.Name;
+                s.Value = i.Id.ToString();
+
+                return s;
+            });
+
+            aevm.Song.MusicId = songService.GetEntity((int)Id).MusicId;
+
             if (ModelState.IsValid)
             {
                 var song = songService.GetEntity((int)Id);
@@ -194,7 +268,7 @@ namespace MvcPL.Controllers
             }
 
 
-            return View();
+            return View(aevm);
         }
 
         [Authorize]

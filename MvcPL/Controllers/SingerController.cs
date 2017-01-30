@@ -41,7 +41,9 @@ namespace MvcPL.Controllers
                 {
                     m.GenreName = genreService.GetEntity(m.GenreId).Name;
                     return m;
-                });
+                })
+                .OrderBy(m => m.DateOut);
+
 
             InitializeBaseModel(svm);
 
@@ -157,9 +159,11 @@ namespace MvcPL.Controllers
 
                 return RedirectToAction("Index", "Singers");
             }
+            sevm.Singer.ImageId = singerService.GetEntity((int)Id).ImageId;
 
+            InitializeBaseModel(sevm);
 
-            return View();
+            return View(sevm);
         }
     }
 }

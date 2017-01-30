@@ -21,7 +21,7 @@ namespace MvcPL.Controllers
             ISingerService singerService, IGenreService genreService,
             ISongService songService, IRateSongService rateSongService,
             ICommentSongService commentSongService)
-            : base(userService, songService, singerService, albumService,commentSongService)
+            : base(userService, songService, singerService, albumService, commentSongService)
         {
 
             this.genreService = genreService;
@@ -44,7 +44,8 @@ namespace MvcPL.Controllers
                     if (m != null)
                         m.Rating = rateSongService.GetRatingBySongId(m.Id);
                     return m;
-                }); ;
+                })
+                .OrderBy(m => m.Name);
 
             avm.Album.GenreName = genreService.GetEntity(avm.Album.GenreId).Name;
 
@@ -170,6 +171,13 @@ namespace MvcPL.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditConfirmed(AlbumEditViewModel aevm, int? Id, HttpPostedFileBase File = null)
         {
+
+            aevm.Singers = singerService.GetAllEntities().Select(m => m.ToMvcSinger()).OrderBy(m => m.Name);
+
+            aevm.Genres = genreService.GetAllEntities().Select(m => m.ToMvcGenre()).OrderBy(m => m.Name);
+
+            InitializeBaseModel(aevm);
+
             if (ModelState.IsValid)
             {
                 var album = albumService.GetEntity((int)Id);
@@ -186,11 +194,12 @@ namespace MvcPL.Controllers
 
                 albumService.Update(album, File);
 
-                return RedirectToAction("Index", "albums");
+                return RedirectToAction("Index", "Albums");
             }
 
+            aevm.Album.ImageId = albumService.GetEntity((int)Id).ImageId;
 
-            return View();
+            return View(aevm);
         }
 
 

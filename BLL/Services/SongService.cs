@@ -110,10 +110,16 @@ namespace BLL.Services
         public IEnumerable<BLLSong> GetSongsOnPage(int pageSize = 10, int page = 1)
         {
             return uow.SongRepository.GetAll()
-                .Skip((page - 1) * pageSize)
-                 .Take(pageSize).Select(Song => Song.ToBllSong())
-                   .OrderBy(Song => Song.Name)
-                     ;
+                .Select(Song => Song.ToBllSong())
+                .Select(m =>
+                {
+                    m.SingerName = uow.SingerRepository.GetById(uow.AlbumRepository.GetById(m.AlbumId).SingerId).Name;
+                    return m;
+                })
+                .OrderBy(m=>m.SingerName)
+                .ThenBy(Song => Song.Name)
+                 .Skip((page - 1) * pageSize)
+                 .Take(pageSize);
 
         }
 
