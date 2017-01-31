@@ -25,6 +25,7 @@ namespace MvcPL.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
 

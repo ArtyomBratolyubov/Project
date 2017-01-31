@@ -403,7 +403,8 @@ namespace MvcPL.Controllers
                 {
                     m.UserName = UserService.GetUserEntity(m.UserId).UserName;
                     return m;
-                });
+                })
+                .OrderByDescending(m => m.DateAdded);
         }
     }
 }
